@@ -1,0 +1,50 @@
+//file screen 1(any name)
+#include "autosar.h"
+
+
+char in=0;
+void setup() {
+  // put your setup code here, to run once:
+
+  Serial.begin(9600);
+  Serial.println("BSWM Starts");
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  if(Serial.available()>0)
+  {
+    in=Serial.read();
+    layer_autosar(in);
+  }
+
+}
+//file screen 2(app.cpp)
+
+#include "autosar.h"
+int app_autosar(int val)
+{
+  if(val==49)
+  {
+    Serial.println("LED ON");
+  }
+  else
+  {
+    Serial.println("LED OFF");
+  }
+}
+//file screen 3(autosar.h)
+#include "Arduino.h"
+
+int layer_autosar(int data);
+int app_autosar(int val);
+
+//file screen 4(layer.cpp)
+
+#include "autosar.h"
+int layer_autosar(int data)
+{
+  app_autosar(data);
+}
