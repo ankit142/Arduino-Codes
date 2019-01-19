@@ -1,0 +1,76 @@
+//Project on creation of OBD design
+
+#define ECHOPIN 3   //input
+#define TRIGPIN 2   //output
+float duration;
+float duration1;
+int distance;
+int distance1;
+
+void setup() {
+Serial.begin(9600);
+pinMode(11,INPUT);
+pinMode(10,OUTPUT);
+pinMode(13,OUTPUT);
+pinMode(11,INPUT);
+pinMode(10,OUTPUT);
+pinMode(13,OUTPUT);
+
+
+}
+
+void loop() {
+digitalWrite(10,LOW);
+delayMicroseconds(2);
+digitalWrite(10,HIGH);
+delayMicroseconds(10);
+digitalWrite(10,LOW);
+float duration = pulseIn(11,HIGH);
+distance= duration*0.034/2;
+Serial.println("\n Brakepads  : ");
+Serial.print(distance);
+Serial.println("mm");
+if(distance>12)
+{
+  digitalWrite(13,HIGH);
+  delay(200);
+  Serial.println(" \n Thickness of Brakepads is more than the limit");
+  Serial.println("\n  Time to change it");
+ 
+}
+
+else if(distance>=5){
+  Serial.println("normal, brakepads are ok");
+  digitalWrite(13,LOW);
+  delay(200);
+}
+else if(distance<5)
+{Serial.println("They are torn");
+digitalWrite(13,HIGH);
+delay(200);
+}
+digitalWrite(10,LOW);
+delayMicroseconds(2);
+digitalWrite(10,HIGH);
+delayMicroseconds(10);
+digitalWrite(10,LOW);
+float duration1 = pulseIn(11,HIGH);
+distance1= duration1*0.034/2;
+Serial.println("\n Engine Coolant Level : ");
+Serial.print(distance);
+Serial.println("cm");
+if(distance>8)
+{
+  digitalWrite(13,HIGH);
+  delay(200);
+  Serial.println(" \n coolant is very low as per the limit");
+  Serial.println("\n  time to change it");
+ 
+}
+
+else if(distance>=5){
+  Serial.println("normal, coolant level is  ok");
+  digitalWrite(13,LOW);
+  delay(200);
+}
+}
