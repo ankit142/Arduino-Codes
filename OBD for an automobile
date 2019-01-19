@@ -1,4 +1,7 @@
 //Project on creation of OBD design
+//Serial Monitor for the output
+//Serial Monitor is on the right topmost corner
+
 
 #define ECHOPIN 3   //input
 #define TRIGPIN 2   //output
